@@ -22,7 +22,7 @@ public class Main {
             Scanner sc = new Scanner(System.in);
             System.out.println("Would you like to (h)it or (s)tand?");
             System.out.println("--------------------");
-            while (dealerHand.handVal() < 15) {
+            while (dealerHand.handVal() < 17) {
                 dealerHand.drawCard(playDeck);
             }
             if (dealerHand.handVal() > 21) {
