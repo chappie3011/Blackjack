@@ -7,44 +7,53 @@ public class Main {
         playDeck.shuffle();
 
 
-        Hand playerHand = new Hand();
-        Hand dealerHand = new Hand();
+        Player player1 = new Player();
+        Player dealer = new Player();
 
-        playerHand.drawCard(playDeck);
-        playerHand.drawCard(playDeck);
-        dealerHand.drawCard(playDeck);
-        dealerHand.drawCard(playDeck);
+        player1.drawCard(playDeck);
+        player1.drawCard(playDeck);
+        dealer.drawCard(playDeck);
+        dealer.drawCard(playDeck);
 
         while (true) {
 
-            System.out.println("Your hand is worth " + playerHand.handVal());
-            System.out.println("The cards in your hand are: " + playerHand.toString());
+            System.out.println("Your hand is worth " + player1.handVal());
+            System.out.println("--------------------");
+            System.out.println("The cards in your hand are: " + player1.toString());
+            System.out.println("--------------------");
+            System.out.println("One of the dealer's cards is " + dealer.dealerToString());
+            System.out.println("--------------------");
             Scanner sc = new Scanner(System.in);
             System.out.println("Would you like to (h)it or (s)tand?");
             System.out.println("--------------------");
-            while (dealerHand.handVal() < 17) {
-                dealerHand.drawCard(playDeck);
+            while (dealer.handVal() < 15) {
+                dealer.drawCard(playDeck);
             }
-            if (dealerHand.handVal() > 21) {
+            if (dealer.handVal() > 21) {
                 System.out.println("Dealer busted! You win!");
-                System.out.println("The dealer's hand was worth " + dealerHand.handVal());
-                System.out.println("The dealer's cards were " + dealerHand.toString());
+                System.out.println("--------------------");
+                System.out.println("The dealer's hand was worth " + dealer.handVal());
+                System.out.println("--------------------");
+                System.out.println("The dealer's cards were " + dealer.toString());
             }
             String choice = sc.nextLine();
             if (choice.equals("h")) {
-                playerHand.drawCard(playDeck);
+                player1.drawCard(playDeck);
 
-                if (playerHand.handVal() > 21) {
+                if (player1.handVal() > 21) {
                     System.out.println("You busted! You lose!");
-                    System.out.println("Your hand is worth " + playerHand.handVal());
-                    System.out.println("The cards in your hand were " + playerHand.toString());
+                    System.out.println("--------------------");
+                    System.out.println("Your hand is worth " + player1.handVal());
+                    System.out.println("--------------------");
+                    System.out.println("The cards in your hand were " + player1.toString());
+                    System.out.println("--------------------");
                     break;
                 }
 
             }
             else if (choice.equals("s")) {
-                System.out.println("Your hand is worth " + playerHand.handVal() + " and the dealer's is worth " + dealerHand.handVal());
-                if (playerHand.handVal() > dealerHand.handVal()) {
+                System.out.println("Your hand is worth " + player1.handVal() + " and the dealer's is worth " + dealer.handVal());
+                if (player1.handVal() > dealer.handVal()) {
                     System.out.println("You win!");
                     break;
                 }
