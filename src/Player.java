@@ -1,5 +1,5 @@
 public class Player extends Hand{
-    public double betVal = 10.00;
+    public double betVal = 100.00;
     public Hand hand;
 
     public Player() {
