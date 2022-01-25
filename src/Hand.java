@@ -13,6 +13,9 @@ public class Hand {
         this.cards = cards;
     }
 
+    public Card getTopCard() {
+        return cards.get(0);
+    }
 
     public Hand() {
         cards = new ArrayList<Card>(0);

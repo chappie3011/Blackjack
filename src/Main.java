@@ -50,11 +50,15 @@ public class Main {
                     System.out.println("Dealer busted! Their hand was worth " + dealer.getHand().handVal() +". You win!");
                     player1.betWin(b);
                     System.out.println("You now have: " +player1.getBetVal());
-//                    for(Card card : player1.getHand().getCards()) {
-//                        player1.getHand().getCards().remove(0);
-//                    }
-//                    System.out.println("Checker: "+player1.toString());
-//                    break;
+                    for(Card card : player1.getHand().getCards()) {
+                        playDeck.addCardToDeck(player1.getHand().getTopCard());
+                    }
+                    for(Card card : dealer.getHand().getCards()) {
+                        playDeck.addCardToDeck(dealer.getHand().getTopCard());
+                    }
+                    player1.getHand().getCards().clear();
+                    dealer.getHand().getCards().clear();
+                    break;
                 }
                 System.out.println("Would you like to hit (1) or stand (2)?");
                 myChoice = sc.nextInt();
@@ -66,11 +70,15 @@ public class Main {
                         System.out.println("Your hand was worth: " + player1.getHand().handVal());
                         player1.betLoss(b);
                         System.out.println("You now have: " +player1.getBetVal());
-//                        for(Card card : player1.getHand().getCards()) {
-//                            player1.getHand().getCards().remove(0);
-//                        }
-//                        System.out.println("Checker: "+player1.toString());
-//                        break;
+                        for(Card card : player1.getHand().getCards()) {
+                            playDeck.addCardToDeck(player1.getHand().getTopCard());
+                        }
+                        for(Card card : dealer.getHand().getCards()) {
+                            playDeck.addCardToDeck(dealer.getHand().getTopCard());
+                        }
+                        player1.getHand().getCards().clear();
+                        dealer.getHand().getCards().clear();
+                        break;
                     }
                     System.out.println("Your cards are: " +player1.toString());
                     System.out.println("They are worth: "+player1.getHand().handVal());
@@ -81,22 +89,30 @@ public class Main {
                         System.out.println("Your hand was worth " +player1.getHand().handVal()+ " while the dealer's was worth " +dealer.getHand().handVal());
                         player1.betWin(b);
                         System.out.println("You now have "+player1.getBetVal());
-//                        for(Card card : player1.getHand().getCards()) {
-//                            player1.getHand().getCards().remove(0);
-//                        }
-//                        System.out.println("Checker: "+player1.toString());
-//                        break;
+                        for(Card card : player1.getHand().getCards()) {
+                            playDeck.addCardToDeck(player1.getHand().getTopCard());
+                        }
+                        for(Card card : dealer.getHand().getCards()) {
+                            playDeck.addCardToDeck(dealer.getHand().getTopCard());
+                        }
+                        player1.getHand().getCards().clear();
+                        dealer.getHand().getCards().clear();
+                        break;
                     }
                     else if(player1.getHand().handVal() < dealer.getHand().handVal()) {
                         System.out.println("You lose!");
                         System.out.println("Your hand was worth " +player1.getHand().handVal()+ " while the dealer's was worth " +dealer.getHand().handVal());
                         player1.betLoss(b);
                         System.out.println("You now have "+player1.getBetVal());
-//                        for(Card card : player1.getHand().getCards()) {
-//                            player1.getHand().getCards().remove(0);
-//                        }
-//                        System.out.println("Checker: "+player1.toString());
-//                        break;
+                        for(Card card : player1.getHand().getCards()) {
+                            playDeck.addCardToDeck(player1.getHand().getTopCard());
+                        }
+                        for(Card card : dealer.getHand().getCards()) {
+                            playDeck.addCardToDeck(dealer.getHand().getTopCard());
+                        }
+                        player1.getHand().getCards().clear();
+                        dealer.getHand().getCards().clear();
+                        break;
                     }
                 }
             }
