@@ -1,7 +1,11 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         // create and shuffle deck
         Deck playDeck = new Deck();
         playDeck.createDeck();
@@ -60,9 +64,9 @@ public class Main {
                     dealer.getHand().getCards().clear();
                     break;
                 }
-                System.out.println("Would you like to hit (1) or stand (2)?");
-                myChoice = sc.nextInt();
-                if (myChoice == 1) {
+                System.out.println("Would you like to (h)it or (s)tand or pause (3)?");
+                String choice = sc.nextLine();
+                if (choice.equals("h")) {
                     player1.getHand().addCardToHand(playDeck.getCard(0));
                     playDeck.removeCardFromDeck(0);
                     if (player1.getHand().handVal() > 21) {
@@ -83,7 +87,7 @@ public class Main {
                     System.out.println("Your cards are: " +player1.toString());
                     System.out.println("They are worth: "+player1.getHand().handVal());
                 }
-                else if (myChoice == 2) {
+                else if (choice.equals("s")) {
                     if(player1.getHand().handVal() > dealer.getHand().handVal()) {
                         System.out.println("You win!");
                         System.out.println("Your hand was worth " +player1.getHand().handVal()+ " while the dealer's was worth " +dealer.getHand().handVal());
@@ -114,6 +118,10 @@ public class Main {
                         dealer.getHand().getCards().clear();
                         break;
                     }
+                }
+                else if (myChoice == 3) {
+                    PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
+                    System.exit(0);
                 }
             }
         }
