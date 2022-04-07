@@ -64,7 +64,7 @@ public class Main {
                     dealer.getHand().getCards().clear();
                     break;
                 }
-                System.out.println("Would you like to (h)it or (s)tand or pause (3)?");
+                System.out.println("Would you like to (h)it or (s)tand or (p)ause?");
                 String choice = sc.nextLine();
                 if (choice.equals("h")) {
                     player1.getHand().addCardToHand(playDeck.getCard(0));
@@ -119,7 +119,7 @@ public class Main {
                         break;
                     }
                 }
-                else if (myChoice == 3) {
+                else if (choice.equals("p")) {
                     PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
                     System.exit(0);
                 }
