@@ -1,11 +1,7 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
         // create and shuffle deck
         Deck playDeck = new Deck();
         playDeck.createDeck();
@@ -21,6 +17,8 @@ public class Main {
         // initialize bet value to 0 and variable for game actions
         double b = 0.00;
         int myChoice = 0;
+        int checker = 0;
+
 
         // game control loop
         while (player1.getBetVal() > 0) {
@@ -29,8 +27,6 @@ public class Main {
             // shuffle deck, decide bet amount, give player and dealer two cards apiece
 
             playDeck.shuffle();
-            System.out.println("You currently have " + player1.getBetVal() + ", how much would you like to bet?");
-            b = sc.nextDouble();
             player1.getHand().addCardToHand(playDeck.getCard(0));
             playDeck.removeCardFromDeck(0);
             player1.getHand().addCardToHand(playDeck.getCard(0));
@@ -44,6 +40,8 @@ public class Main {
             System.out.println("Your cards are: " +player1.toString());
             System.out.println("They are worth: "+player1.getHand().handVal());
             System.out.println("One of the dealer's cards is: "+dealer.getHand().dealerToString());
+            System.out.println("You currently have " + player1.getBetVal() + ", how much would you like to bet?");
+            b = sc.nextDouble();
 
             while (true) {
                 while(dealer.getHand().handVal() < 15) {
@@ -54,19 +52,18 @@ public class Main {
                     System.out.println("Dealer busted! Their hand was worth " + dealer.getHand().handVal() +". You win!");
                     player1.betWin(b);
                     System.out.println("You now have: " +player1.getBetVal());
+                    System.out.println("-------------------NEW ROUND-------------------------");
                     for(Card card : player1.getHand().getCards()) {
                         playDeck.addCardToDeck(player1.getHand().getTopCard());
-                    }
-                    for(Card card : dealer.getHand().getCards()) {
-                        playDeck.addCardToDeck(dealer.getHand().getTopCard());
                     }
                     player1.getHand().getCards().clear();
                     dealer.getHand().getCards().clear();
                     break;
                 }
-                System.out.println("Would you like to (h)it or (s)tand or (p)ause?");
-                String choice = sc.nextLine();
-                if (choice.equals("h")) {
+                System.out.println("Would you like to hit (1), stand (2), or double down (3)? Note: You can only double down immediately after your first two cards have been dealt");
+                myChoice = sc.nextInt();
+                if (myChoice == 1) {
+                    checker = 0;
                     player1.getHand().addCardToHand(playDeck.getCard(0));
                     playDeck.removeCardFromDeck(0);
                     if (player1.getHand().handVal() > 21) {
@@ -74,11 +71,9 @@ public class Main {
                         System.out.println("Your hand was worth: " + player1.getHand().handVal());
                         player1.betLoss(b);
                         System.out.println("You now have: " +player1.getBetVal());
+                        System.out.println("-------------------NEW ROUND-------------------------");
                         for(Card card : player1.getHand().getCards()) {
                             playDeck.addCardToDeck(player1.getHand().getTopCard());
-                        }
-                        for(Card card : dealer.getHand().getCards()) {
-                            playDeck.addCardToDeck(dealer.getHand().getTopCard());
                         }
                         player1.getHand().getCards().clear();
                         dealer.getHand().getCards().clear();
@@ -87,17 +82,16 @@ public class Main {
                     System.out.println("Your cards are: " +player1.toString());
                     System.out.println("They are worth: "+player1.getHand().handVal());
                 }
-                else if (choice.equals("s")) {
+                else if (myChoice == 2) {
+                    checker = 0;
                     if(player1.getHand().handVal() > dealer.getHand().handVal()) {
                         System.out.println("You win!");
                         System.out.println("Your hand was worth " +player1.getHand().handVal()+ " while the dealer's was worth " +dealer.getHand().handVal());
                         player1.betWin(b);
                         System.out.println("You now have "+player1.getBetVal());
+                        System.out.println("-------------------NEW ROUND-------------------------");
                         for(Card card : player1.getHand().getCards()) {
                             playDeck.addCardToDeck(player1.getHand().getTopCard());
-                        }
-                        for(Card card : dealer.getHand().getCards()) {
-                            playDeck.addCardToDeck(dealer.getHand().getTopCard());
                         }
                         player1.getHand().getCards().clear();
                         dealer.getHand().getCards().clear();
@@ -108,21 +102,34 @@ public class Main {
                         System.out.println("Your hand was worth " +player1.getHand().handVal()+ " while the dealer's was worth " +dealer.getHand().handVal());
                         player1.betLoss(b);
                         System.out.println("You now have "+player1.getBetVal());
+                        System.out.println("-------------------NEW ROUND-------------------------");
                         for(Card card : player1.getHand().getCards()) {
                             playDeck.addCardToDeck(player1.getHand().getTopCard());
                         }
-                        for(Card card : dealer.getHand().getCards()) {
-                            playDeck.addCardToDeck(dealer.getHand().getTopCard());
+                        player1.getHand().getCards().clear();
+                        dealer.getHand().getCards().clear();
+                        break;
+                    }
+                    else if (player1.getHand().handVal() == dealer.getHand().handVal()) {
+                        System.out.println("Tie!");
+                        System.out.println("Your hand was worth " +player1.getHand().handVal()+ " while the dealer's was worth " +dealer.getHand().handVal());
+                        System.out.println("You now have "+player1.getBetVal());
+                        System.out.println("-------------------NEW ROUND-------------------------");
+                        for(Card card : player1.getHand().getCards()) {
+                            playDeck.addCardToDeck(player1.getHand().getTopCard());
                         }
                         player1.getHand().getCards().clear();
                         dealer.getHand().getCards().clear();
                         break;
                     }
                 }
-                else if (choice.equals("p")) {
-                    PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
-                    System.exit(0);
+                else if(myChoice == 3 && checker == 0) {
+                    System.out.println("How much % would you like to increase your bet by?");
+                    int increase = sc.nextInt();
+                    System.out.println("Your new bet is " + (b+(b*0.01*increase)));
+
                 }
+
             }
         }
         System.out.println("Game over!");
