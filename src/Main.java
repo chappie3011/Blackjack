@@ -126,7 +126,8 @@ public class Main {
                 else if(myChoice == 3 && checker == 0) {
                     System.out.println("How much % would you like to increase your bet by?");
                     int increase = sc.nextInt();
-                    System.out.println("Your new bet is " + (b+(b*0.01*increase)));
+                    b = b+(b*0.01*increase);
+                    System.out.println("Your new bet is " + b);
 
                 }
 
