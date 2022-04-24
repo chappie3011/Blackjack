@@ -1,3 +1,8 @@
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
 public class Player {
     private double betVal = 100.00;
     private Hand hand;
@@ -36,24 +41,11 @@ public class Player {
         return ""+hand;
     }
 
-    //    public void reset(Deck mainDeck) {
-//
-//        int deckSize = this.deck.size();
-//
-//        for (int i = 0; i < deckSize; i++) {
-//            mainDeck.addCard(this.getCard(i));
-//        }
-//
-//        for (int i = 0; i < deckSize; i++) {
-//            this.removeCard(0);
-//        }
-//    }
-    // TODO: remove later
-//    public void resetHand(Deck goingTo) {
-//        for(int i = 0; i < hand.getHand().size(); i++) {
-//            goingTo.addCard(hand.getCard(i));
-//        }
-//    }
+    public static void writeToFile(Player p) throws IOException {
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("Stats.txt"));
+        objectOutputStream.writeObject(p);
+    }
+
 
 
 

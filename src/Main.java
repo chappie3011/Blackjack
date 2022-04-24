@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -60,7 +61,7 @@ public class Main {
                     dealer.getHand().getCards().clear();
                     break;
                 }
-                System.out.println("Would you like to hit (1), stand (2), or double down (3)? Note: You can only double down immediately after your first two cards have been dealt");
+                System.out.println("Would you like to hit (1), stand (2), double down (3), or pause (4)? Note: You can only double down immediately after your first two cards have been dealt");
                 myChoice = sc.nextInt();
                 if (myChoice == 1) {
                     checker = 0;
