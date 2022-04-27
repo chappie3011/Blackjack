@@ -6,6 +6,11 @@ public class Hand {
 
     private ArrayList<Card> cards;
 
+    // constructor
+    public Hand() {
+        cards = new ArrayList<Card>(0);
+    }
+
     // returns cards in hand
     public ArrayList<Card> getCards() {
         return cards;
@@ -22,9 +27,7 @@ public class Hand {
     }
 
 
-    public Hand() {
-        cards = new ArrayList<Card>(0);
-    }
+
 
     // add card to hand
     public void addCardToHand(Card c){
