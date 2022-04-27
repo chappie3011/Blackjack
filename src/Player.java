@@ -1,37 +1,40 @@
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+
 
 public class Player {
     private double betVal = 100.00;
     private Hand hand;
 
+
     public Player() {
         hand = new Hand();
     }
 
+    // subtracts money from player's account
     public void betLoss(double b1) {
         betVal -= b1;
     }
 
+    // adds money to player's account
     public void betWin(double b1) {
-
         betVal += b1;
     }
 
+    // returns value that player bet
     public double getBetVal() {
         return betVal;
     }
 
+    // sets value of bet
     public void setBetVal(double betVal) {
         this.betVal = betVal;
     }
 
+    // returns cards in hand
     public Hand getHand() {
         return hand;
     }
 
+    // sets hand
     public void setHand(Hand hand) {
         this.hand = hand;
     }
@@ -41,10 +44,7 @@ public class Player {
         return ""+hand;
     }
 
-    public static void writeToFile(Player p) throws IOException {
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("Stats.txt"));
-        objectOutputStream.writeObject(p);
-    }
+
 
 
 
