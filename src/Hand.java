@@ -3,30 +3,36 @@ import java.util.HashMap;
 
 
 public class Hand {
+
     private ArrayList<Card> cards;
 
+    // returns cards in hand
     public ArrayList<Card> getCards() {
         return cards;
     }
 
+    // sets cards in hand
     public void setHand(ArrayList<Card> cards) {
         this.cards = cards;
     }
 
+    // returns top card of deck
     public Card getTopCard() {
         return cards.get(0);
     }
+
 
     public Hand() {
         cards = new ArrayList<Card>(0);
     }
 
-    // TODO: remove later
+    // add card to hand
     public void addCardToHand(Card c){
         cards.add(c);
 
     }
 
+    // prints out list of cards in hand
     public String toString() {
         String cardList = "";
         for (Card card : this.cards) {
@@ -35,13 +41,14 @@ public class Hand {
         return cardList;
     }
 
+    // returns top card of dealer's hand
     public Card dealerToString() {
         Card dealerCard = this.cards.get(0);
         return dealerCard;
 
     }
 
-    // TODO: move to Card class
+    // calculates total numeric value of hand
     public int handVal() {
         HashMap<Value, Integer> cardValues= new HashMap<Value, Integer>();
         cardValues.put(Value.ACE, 1);
