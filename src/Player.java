@@ -4,7 +4,7 @@ public class Player {
     private double betVal = 100.00;
     private Hand hand;
 
-
+    // constructor
     public Player() {
         hand = new Hand();
     }

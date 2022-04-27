@@ -6,6 +6,7 @@ public class Card {
     private Suit suit;
     private Value value;
 
+    // constructor
     public Card(Suit s, Value v) {
         suit = s;
         value = v;
